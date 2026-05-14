@@ -27,8 +27,8 @@ dev = ["pytest>=7.0"]
 repo-radar = "repo_radar.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/<your-github-username>/repo-radar"
-Issues = "https://github.com/<your-github-username>/repo-radar/issues"
+Homepage = "https://github.com/Dheightsan/repo-radar"
+Issues = "https://github.com/Dheightsan/repo-radar/issues"
 
 [tool.setuptools]
 packages = ["repo_radar"]

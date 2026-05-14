@@ -1,6 +1,6 @@
 # repo-radar
 
-[![CI](https://github.com/<your-github-username>/repo-radar/actions/workflows/ci.yml/badge.svg)](https://github.com/<your-github-username>/repo-radar/actions/workflows/ci.yml)
+[![CI](https://github.com/Dheightsan/repo-radar/actions/workflows/ci.yml/badge.svg)](https://github.com/Dheightsan/repo-radar/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
 [![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)](pyproject.toml)
@@ -42,7 +42,7 @@ pip install repo-radar
 Or from source:
 
 ```bash
-git clone https://github.com/<your-github-username>/repo-radar
+git clone https://github.com/Dheightsan/repo-radar
 cd repo-radar
 pip install -e .
 ```
