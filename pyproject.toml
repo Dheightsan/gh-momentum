@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "repo-radar"
+name = "gh-momentum"
 version = "0.1.0"
 description = "Surface GitHub repos gaining traction fast, before they hit the front page."
 readme = "README.md"
@@ -21,18 +21,18 @@ classifiers = [
 dependencies = []
 
 [project.optional-dependencies]
-# The MCP SDK requires Python >=3.10; the core repo-radar stays 3.9-compatible.
+# The MCP SDK requires Python >=3.10; the core gh-momentum stays 3.9-compatible.
 # On Python 3.9 this extra installs nothing and the MCP server is unavailable.
 mcp = ["mcp>=1.0; python_version >= '3.10'"]
 dev = ["pytest>=7.0", "mcp>=1.0; python_version >= '3.10'"]
 
 [project.scripts]
-repo-radar = "repo_radar.cli:main"
-repo-radar-mcp = "repo_radar.mcp_server:main"
+gh-momentum = "gh_momentum.cli:main"
+gh-momentum-mcp = "gh_momentum.mcp_server:main"
 
 [project.urls]
-Homepage = "https://github.com/Dheightsan/repo-radar"
-Issues = "https://github.com/Dheightsan/repo-radar/issues"
+Homepage = "https://github.com/Dheightsan/gh-momentum"
+Issues = "https://github.com/Dheightsan/gh-momentum/issues"
 
 [tool.setuptools]
-packages = ["repo_radar"]
+packages = ["gh_momentum"]

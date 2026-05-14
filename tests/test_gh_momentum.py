@@ -1,4 +1,4 @@
-"""Tests for repo-radar.
+"""Tests for gh-momentum.
 
 The scoring tests run fully offline. The single network test is opt-in:
 set ``REPO_RADAR_LIVE_TEST=1`` to enable it.
@@ -7,9 +7,9 @@ import os
 
 import pytest
 
-from repo_radar import MomentumRepo, __version__, find_momentum
-from repo_radar.cli import build_parser
-from repo_radar.detector import _score
+from gh_momentum import MomentumRepo, __version__, find_momentum
+from gh_momentum.cli import build_parser
+from gh_momentum.detector import _score
 
 
 def test_imports_and_version():
@@ -74,10 +74,10 @@ def test_cli_parser_defaults():
 
 def test_mcp_server_imports():
     pytest.importorskip("mcp")
-    from repo_radar import mcp_server
+    from gh_momentum import mcp_server
 
     assert mcp_server.mcp is not None
-    assert mcp_server.mcp.name == "repo-radar"
+    assert mcp_server.mcp.name == "gh-momentum"
     assert callable(mcp_server.main)
 
 

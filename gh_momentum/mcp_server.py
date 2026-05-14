@@ -1,18 +1,18 @@
-"""repo-radar MCP server.
+"""gh-momentum MCP server.
 
-Exposes repo-radar's momentum detection over the Model Context Protocol,
+Exposes gh-momentum's momentum detection over the Model Context Protocol,
 so AI agents can query GitHub for repositories gaining traction fast.
 
 This module is an OPTIONAL extra. Install it with:
 
-    pip install "repo-radar[mcp]"
+    pip install "gh-momentum[mcp]"
 
-The core repo-radar CLI and library stay dependency-free — only this
+The core gh-momentum CLI and library stay dependency-free — only this
 server needs the ``mcp`` package.
 
 Run the server (stdio transport, for MCP clients):
 
-    repo-radar-mcp
+    gh-momentum-mcp
 
 Set ``GITHUB_TOKEN`` in the environment to raise the GitHub API rate
 limit from 60 to 5,000 requests/hour.
@@ -23,13 +23,13 @@ try:
     from mcp.server.fastmcp import FastMCP
 except ImportError as exc:  # pragma: no cover
     raise SystemExit(
-        "The repo-radar MCP server needs the 'mcp' package. Install it with:\n"
-        '    pip install "repo-radar[mcp]"'
+        "The gh-momentum MCP server needs the 'mcp' package. Install it with:\n"
+        '    pip install "gh-momentum[mcp]"'
     ) from exc
 
-from repo_radar.detector import find_momentum
+from gh_momentum.detector import find_momentum
 
-mcp = FastMCP("repo-radar")
+mcp = FastMCP("gh-momentum")
 
 
 @mcp.tool()
@@ -73,7 +73,7 @@ def find_trending_repos(
 
 
 def main() -> None:
-    """Entry point for the ``repo-radar-mcp`` console script."""
+    """Entry point for the ``gh-momentum-mcp`` console script."""
     mcp.run()
 
 

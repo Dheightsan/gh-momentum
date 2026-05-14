@@ -1,12 +1,12 @@
-"""repo-radar command-line interface."""
+"""gh-momentum command-line interface."""
 from __future__ import annotations
 
 import argparse
 import json
 import sys
 
-from repo_radar import __version__
-from repo_radar.detector import find_momentum
+from gh_momentum import __version__
+from gh_momentum.detector import find_momentum
 
 
 def _print_human(repos) -> None:
@@ -31,7 +31,7 @@ def _print_human(repos) -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="repo-radar",
+        prog="gh-momentum",
         description=(
             "Surface GitHub repos gaining traction fast, "
             "before they hit the front page."
@@ -73,7 +73,7 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     parser.add_argument(
-        "--version", action="version", version=f"repo-radar {__version__}",
+        "--version", action="version", version=f"gh-momentum {__version__}",
     )
     return parser
 

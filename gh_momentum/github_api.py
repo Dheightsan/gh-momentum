@@ -14,7 +14,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta
 
-log = logging.getLogger("repo_radar.github_api")
+log = logging.getLogger("gh_momentum.github_api")
 
 _GITHUB_API = "https://api.github.com"
 _TIMEOUT = 12
@@ -23,7 +23,7 @@ _TIMEOUT = 12
 def _headers(token: str | None = None) -> dict:
     headers = {
         "Accept": "application/vnd.github+json",
-        "User-Agent": "repo-radar",
+        "User-Agent": "gh-momentum",
     }
     token = token or os.getenv("GITHUB_TOKEN")
     if token:

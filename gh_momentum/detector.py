@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
 
-from repo_radar.github_api import fetch_repos_by_topic, fetch_trending_repos
+from gh_momentum.github_api import fetch_repos_by_topic, fetch_trending_repos
 
 
 @dataclass
