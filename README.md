@@ -87,6 +87,20 @@ for repo in find_momentum(days_back=7, min_velocity=50, match=["llm"]):
 
 `find_momentum()` returns a list of `MomentumRepo` dataclasses, sorted by score.
 
+## MCP server
+
+repo-radar ships an optional [Model Context Protocol](https://modelcontextprotocol.io)
+server, so AI agents can query GitHub momentum as a tool.
+
+```bash
+pip install "repo-radar[mcp]"
+repo-radar-mcp          # runs over stdio, for MCP clients
+```
+
+It exposes one tool, `find_trending_repos`, with the same parameters as the
+CLI. Point any MCP-compatible client at the `repo-radar-mcp` command. The core
+CLI and library stay dependency-free — only the MCP server pulls in `mcp`.
+
 ## How the score works
 
 The 0-10 score combines three signals:

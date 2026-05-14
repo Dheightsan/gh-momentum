@@ -72,6 +72,15 @@ def test_cli_parser_defaults():
     assert args.json is False
 
 
+def test_mcp_server_imports():
+    pytest.importorskip("mcp")
+    from repo_radar import mcp_server
+
+    assert mcp_server.mcp is not None
+    assert mcp_server.mcp.name == "repo-radar"
+    assert callable(mcp_server.main)
+
+
 @pytest.mark.skipif(
     os.getenv("REPO_RADAR_LIVE_TEST") != "1",
     reason="network test — set REPO_RADAR_LIVE_TEST=1 to enable",

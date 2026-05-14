@@ -21,10 +21,12 @@ classifiers = [
 dependencies = []
 
 [project.optional-dependencies]
-dev = ["pytest>=7.0"]
+mcp = ["mcp>=1.0"]
+dev = ["pytest>=7.0", "mcp>=1.0"]
 
 [project.scripts]
 repo-radar = "repo_radar.cli:main"
+repo-radar-mcp = "repo_radar.mcp_server:main"
 
 [project.urls]
 Homepage = "https://github.com/Dheightsan/repo-radar"
