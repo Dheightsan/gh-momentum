@@ -1,5 +1,7 @@
 # gh-momentum
 
+[![PyPI](https://img.shields.io/pypi/v/gh-momentum.svg)](https://pypi.org/project/gh-momentum/)
+[![Downloads](https://img.shields.io/pypi/dm/gh-momentum.svg)](https://pypi.org/project/gh-momentum/)
 [![CI](https://github.com/Dheightsan/gh-momentum/actions/workflows/ci.yml/badge.svg)](https://github.com/Dheightsan/gh-momentum/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
@@ -32,6 +34,31 @@ Star count is a lagging indicator. By the time a repo has 20k stars, the
 opportunity to be early — to contribute, to build on top of it, to write the
 first tutorial — is mostly gone. **Star velocity is a leading indicator.**
 `gh-momentum` ranks by velocity so you see things while they're still small.
+
+## How it works
+
+```mermaid
+flowchart LR
+    GH[GitHub Search API]
+    Fetcher["github_api.py<br/>fetch + normalize"]
+    Scorer["detector.py<br/>score 0-10"]
+    CLI["gh-momentum<br/>CLI"]
+    Lib["find_momentum<br/>library"]
+    MCP["gh-momentum-mcp<br/>MCP server"]
+    Terminal[Your terminal]
+    Code[Your Python code]
+    Agent[AI agent / Claude Desktop / Cursor]
+
+    GH --> Fetcher
+    Fetcher --> Scorer
+    Scorer --> CLI --> Terminal
+    Scorer --> Lib --> Code
+    Scorer --> MCP --> Agent
+```
+
+One fetcher, one scoring function, three surfaces (CLI / library / MCP). The
+core has zero dependencies; only the optional MCP server pulls in the `mcp`
+package.
 
 ## Install
 
