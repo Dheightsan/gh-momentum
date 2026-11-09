@@ -23,8 +23,8 @@ dependencies = []
 [project.optional-dependencies]
 # The MCP SDK requires Python >=3.10; the core gh-momentum stays 3.9-compatible.
 # On Python 3.9 this extra installs nothing and the MCP server is unavailable.
-mcp = ["mcp>=1.0; python_version >= '3.10'"]
-dev = ["pytest>=7.0", "mcp>=1.0; python_version >= '3.10'"]
+mcp = ["mcp>=1.0,<2; python_version >= '3.10'"]
+dev = ["pytest>=7.0", "mcp>=1.0,<2; python_version >= '3.10'"]
 
 [project.scripts]
 gh-momentum = "gh_momentum.cli:main"
