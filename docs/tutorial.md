@@ -1,6 +1,6 @@
 # Why I stopped sorting GitHub by stars
 
-*A short walkthrough of `gh-momentum` — a tiny tool to find repos gaining traction before they hit the front page.*
+*A short walkthrough of `gh-momentum`, a tiny tool to find repos gaining traction before they hit the front page.*
 
 ---
 
@@ -10,8 +10,8 @@ Sort any GitHub topic page by stars and the top results have been there for
 years. `awesome-python` has 240k stars. It's been on the list of every "best
 of" article since 2017. It's not news. It's archaeology.
 
-By the time something has 20,000 stars, the interesting moments — the first
-issue, the first PR, the first time someone built on top of it — are gone.
+By the time something has 20,000 stars, the interesting moments (the first
+issue, the first PR, the first time someone built on top of it) are gone.
 
 **Star count is a lagging indicator.** It tells you what *was* popular, not
 what *is becoming* popular.
@@ -54,18 +54,18 @@ That's the point.
 
 The score is a single 0-10 number combining three things:
 
-1. **Star velocity** — `stars / days_alive`. This is the dominant signal,
+1. **Star velocity**: `stars / days_alive`. This is the dominant signal,
    capped near 8.0 to avoid one viral day saturating the rest of the score.
-2. **Total stars** — a small confidence bonus (up to +1.0). A repo with
+2. **Total stars**: a small confidence bonus (up to +1.0). A repo with
    2,000 stars at 100/day is more believable than one with 50 stars at
    100/day on its first day.
-3. **Keyword match** — optional. If you pass `--match llm,rust`, repos
+3. **Keyword match**: optional. If you pass `--match llm,rust`, repos
    whose topics, language, name or description hit those keywords get a
    small bump.
 
 The whole scoring function is one function in
-[`detector.py`](https://github.com/Dheightsan/gh-momentum/blob/main/gh_momentum/detector.py)
-— easy to fork and tune.
+[`detector.py`](https://github.com/Dheightsan/gh-momentum/blob/main/gh_momentum/detector.py),
+easy to fork and tune.
 
 ---
 
@@ -93,7 +93,7 @@ gh-momentum --days 3 --min-velocity 100 --json
 
 ## Using it as an MCP tool
 
-If you use Claude Desktop, Cursor, Cline, or any MCP-capable AI client,
+If you use Claude Desktop, Cursor, Cline, or any MCP-capable client,
 `gh-momentum` ships an optional MCP server. Install with
 `pip install "gh-momentum[mcp]"` and add this to your client config:
 
@@ -107,19 +107,19 @@ If you use Claude Desktop, Cursor, Cline, or any MCP-capable AI client,
 }
 ```
 
-Then ask your assistant things like *"what Rust repos are trending this
+Then ask your client things like *"what Rust repos are trending this
 week with at least 100 stars/day?"* and it'll fetch live data from GitHub
 and tell you.
 
 This is the use case I personally cared about most: I don't want to remember
-to run a CLI. I want my AI assistant to know how to look this up when the
+to run a CLI. I want my MCP client to know how to look this up when the
 topic comes up in conversation.
 
 ---
 
 ## Notes for users in low-rate-limit territory
 
-The GitHub Search API allows 60 requests/hour unauthenticated. If you query
+The GitHub Search API allows 10 requests/minute unauthenticated. If you query
 more than that, set a token:
 
 ```bash
@@ -127,8 +127,8 @@ export GITHUB_TOKEN=ghp_your_token
 gh-momentum
 ```
 
-A token with **no scopes at all** is enough — `gh-momentum` only reads
-public data. That gets you to 5,000 requests/hour.
+A token with **no scopes at all** is enough, since `gh-momentum` only reads
+public data. That gets you to 30 requests/minute.
 
 ---
 
@@ -151,5 +151,5 @@ It also isn't a recommender. It doesn't know what *you* care about. The
 - MIT licensed, zero runtime dependencies, under 500 lines.
 
 If you find a useful query, post it in the
-[issues](https://github.com/Dheightsan/gh-momentum/issues) — I'd like to
+[issues](https://github.com/Dheightsan/gh-momentum/issues). I'd like to
 collect a list of good ones in the README.

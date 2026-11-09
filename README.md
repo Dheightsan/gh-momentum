@@ -7,7 +7,7 @@
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)](https://www.python.org/)
 [![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)](pyproject.toml)
 
-**Surface GitHub repos gaining traction fast — before they hit the front page.**
+**Surface GitHub repos gaining traction fast, before they hit the front page.**
 
 `gh-momentum` queries the GitHub Search API for newly-created repositories and
 ranks them by *momentum* (stars per day), not by total stars. A repo with 800
@@ -31,8 +31,8 @@ $ gh-momentum --days 7 --min-velocity 50
 ## Why
 
 Star count is a lagging indicator. By the time a repo has 20k stars, the
-opportunity to be early — to contribute, to build on top of it, to write the
-first tutorial — is mostly gone. **Star velocity is a leading indicator.**
+opportunity to be early (to contribute, to build on top of it, to write the
+first tutorial) is mostly gone. **Star velocity is a leading indicator.**
 `gh-momentum` ranks by velocity so you see things while they're still small.
 
 ## How it works
@@ -47,7 +47,7 @@ flowchart LR
     MCP["gh-momentum-mcp<br/>MCP server"]
     Terminal[Your terminal]
     Code[Your Python code]
-    Agent[AI agent / Claude Desktop / Cursor]
+    Agent[MCP client]
 
     GH --> Fetcher
     Fetcher --> Scorer
@@ -95,8 +95,8 @@ gh-momentum --verbose
 
 ### Rate limits
 
-The GitHub Search API allows **60 requests/hour unauthenticated**. Set a token
-to raise that to **5,000/hour**:
+The GitHub Search API allows **10 requests/minute unauthenticated**. Set a token
+to raise that to **30/minute**:
 
 ```bash
 export GITHUB_TOKEN=ghp_your_token_here
@@ -104,7 +104,7 @@ gh-momentum
 # or: gh-momentum --token ghp_your_token_here
 ```
 
-A token with **no scopes at all** is enough — `gh-momentum` only reads public data.
+A token with **no scopes at all** is enough, since `gh-momentum` only reads public data.
 
 ## Use as a library
 
@@ -117,12 +117,12 @@ for repo in find_momentum(days_back=7, min_velocity=50, match=["llm"]):
 
 `find_momentum()` returns a list of `MomentumRepo` dataclasses, sorted by score.
 
-## Use it as an MCP server with your AI assistant
+## Use it as an MCP server
 
 gh-momentum ships an optional [Model Context Protocol](https://modelcontextprotocol.io)
-server. Once installed, **any MCP-compatible AI client can call it as a tool**
-— ask things like *"what Python repos are trending this week with high
-velocity?"* and your assistant fetches live data from GitHub.
+server. Once installed, **any MCP client can call it as a tool**. Ask things
+like *"what Python repos are trending this week with high velocity?"* and
+the client fetches live data from GitHub.
 
 Install with the `mcp` extra:
 
@@ -171,7 +171,7 @@ client):
 
 Any client that speaks MCP over stdio can spawn `gh-momentum-mcp` as a
 subprocess. The `GITHUB_TOKEN` environment variable is optional and raises the
-GitHub API rate limit from 60 to 5,000 requests/hour.
+GitHub Search API rate limit from 10 to 30 requests/minute.
 
 ### The exposed tool
 
@@ -183,7 +183,7 @@ stars, star velocity, language, topics, score (0-10) and matched keywords.
 Example questions that route through this tool well:
 
 - *"Find Rust repos created in the last 14 days with at least 100 stars/day."*
-- *"Show me LLM-related projects gaining traction this week — boost the ones
+- *"Show me LLM-related projects gaining traction this week and boost the ones
   matching agents, RAG, or vector search."*
 - *"Compare star velocity on these two repos."*
 
@@ -197,8 +197,8 @@ The 0-10 score combines three signals:
 | **Absolute stars**  | Small confidence bonus (up to +1.0)               |
 | **Keyword match**   | Optional boost when `--match` keywords hit (up to +1.5) |
 
-The scoring lives in one function — `_score()` in
-[`gh_momentum/detector.py`](gh_momentum/detector.py) — so it's easy to read,
+The scoring lives in one function, `_score()` in
+[`gh_momentum/detector.py`](gh_momentum/detector.py), so it's easy to read,
 fork, and tune to your own taste.
 
 ## Development
@@ -216,9 +216,9 @@ GH_MOMENTUM_LIVE_TEST=1 pytest -q
 
 ## Contributing
 
-Issues and PRs welcome. This is maintained on a best-effort basis — if you need
+Issues and PRs welcome. This is maintained on a best-effort basis. If you need
 a feature, a PR is the fastest path. Keep the zero-dependency rule intact.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
