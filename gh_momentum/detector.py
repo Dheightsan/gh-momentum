@@ -1,9 +1,9 @@
-"""Momentum scoring — ranks repos by how fast they are gaining traction.
+"""Momentum scoring: ranks repos by how fast they are gaining traction.
 
 The score (0-10) combines three signals:
-  * **star velocity** (stars per day of real age) — the primary signal
-  * **absolute stars** — a small confidence bonus
-  * **keyword match** — an optional boost when a repo matches topics you care about
+  * **star velocity** (stars per day of real age), the primary signal
+  * **absolute stars**: a small confidence bonus
+  * **keyword match**: an optional boost when a repo matches topics you care about
 """
 from __future__ import annotations
 

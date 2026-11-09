@@ -26,5 +26,5 @@ Thumbs.db
 # Local env
 .env
 
-# Launch checklist — local only, never published
+# Launch checklist, local only, never published
 LANZAMIENTO.md

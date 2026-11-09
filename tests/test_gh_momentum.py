@@ -83,7 +83,7 @@ def test_mcp_server_imports():
 
 @pytest.mark.skipif(
     os.getenv("GH_MOMENTUM_LIVE_TEST") != "1",
-    reason="network test — set GH_MOMENTUM_LIVE_TEST=1 to enable",
+    reason="network test, set GH_MOMENTUM_LIVE_TEST=1 to enable",
 )
 def test_live_fetch_smoke():
     repos = find_momentum(days_back=14, min_stars=100, limit=5)

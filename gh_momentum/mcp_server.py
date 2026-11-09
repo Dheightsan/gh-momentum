@@ -7,7 +7,7 @@ This module is an OPTIONAL extra. Install it with:
 
     pip install "gh-momentum[mcp]"
 
-The core gh-momentum CLI and library stay dependency-free — only this
+The core gh-momentum CLI and library stay dependency-free. Only this
 server needs the ``mcp`` package.
 
 Run the server (stdio transport, for MCP clients):
