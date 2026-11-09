@@ -148,7 +148,7 @@ It also isn't a recommender. It doesn't know what *you* care about. The
 
 - GitHub: <https://github.com/Dheightsan/gh-momentum>
 - PyPI: `pip install gh-momentum`
-- MIT licensed, zero runtime dependencies, ~250 lines.
+- MIT licensed, zero runtime dependencies, under 500 lines.
 
 If you find a useful query, post it in the
 [issues](https://github.com/Dheightsan/gh-momentum/issues) — I'd like to

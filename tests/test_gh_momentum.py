@@ -35,22 +35,22 @@ def test_score_velocity_drives_ranking():
 
 def test_score_keyword_match_boosts():
     repo = {
-        "star_velocity_per_day": 20, "stars": 500, "topics": ["llm", "agent"],
-        "name": "x/cool-agent", "language": "Python", "description": "an llm tool",
+        "star_velocity_per_day": 20, "stars": 500, "topics": ["cli", "tool"],
+        "name": "x/cool-tool", "language": "Python", "description": "a cli tool",
     }
     no_match, matched_empty = _score(repo, set())
-    with_match, matched = _score(repo, {"llm"})
+    with_match, matched = _score(repo, {"cli"})
     assert with_match > no_match
-    assert "llm" in matched
+    assert "cli" in matched
     assert matched_empty == []
 
 
 def test_score_capped_at_10():
     insane = {
-        "star_velocity_per_day": 99999, "stars": 999999, "topics": ["llm"],
-        "name": "z/llm", "language": "llm", "description": "llm llm llm",
+        "star_velocity_per_day": 99999, "stars": 999999, "topics": ["cli"],
+        "name": "z/cli", "language": "cli", "description": "cli cli cli",
     }
-    score, _ = _score(insane, {"llm"})
+    score, _ = _score(insane, {"cli"})
     assert score <= 10.0
 
 

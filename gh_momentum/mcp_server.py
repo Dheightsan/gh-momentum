@@ -1,7 +1,7 @@
 """gh-momentum MCP server.
 
 Exposes gh-momentum's momentum detection over the Model Context Protocol,
-so AI agents can query GitHub for repositories gaining traction fast.
+so MCP clients can query GitHub for repositories gaining traction fast.
 
 This module is an OPTIONAL extra. Install it with:
 
@@ -52,7 +52,7 @@ def find_trending_repos(
         days_back: How far back to look for newly-created repos (default 7).
         min_stars: Minimum total stars for a repo to be considered (default 30).
         min_velocity: Minimum stars/day required to appear in results (default 0).
-        topics: Optional GitHub topics to additionally search (e.g. ["llm", "rust"]).
+        topics: Optional GitHub topics to additionally search (e.g. ["cli", "rust"]).
         match: Optional keywords that boost a repo's score when matched.
         limit: Maximum number of results to return (default 15).
 

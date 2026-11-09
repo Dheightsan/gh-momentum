@@ -19,11 +19,11 @@ Zero dependencies. Pure Python standard library. One file of logic, one CLI.
 ```
 $ gh-momentum --days 7 --min-velocity 50
 
-   9.1/10  acme/turbo-agent  (1240*, 177.1/day, Python)
+   7.3/10  acme/turbo-agent  (1240*, 177.1/day, Python)
           A minimal autonomous agent runtime that fits in 500 lines.
           https://github.com/acme/turbo-agent
 
-   7.4/10  data-co/ducklake  (612*, 87.4/day, Rust)
+   3.6/10  data-co/ducklake  (612*, 87.4/day, Rust)
           Embedded analytics database with a Postgres wire protocol.
           https://github.com/data-co/ducklake
 ```
