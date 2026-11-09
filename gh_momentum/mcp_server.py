@@ -14,8 +14,8 @@ Run the server (stdio transport, for MCP clients):
 
     gh-momentum-mcp
 
-Set ``GITHUB_TOKEN`` in the environment to raise the GitHub API rate
-limit from 60 to 5,000 requests/hour.
+Set ``GITHUB_TOKEN`` in the environment to raise the GitHub Search API
+rate limit from 10 to 30 requests/minute.
 """
 from __future__ import annotations
 

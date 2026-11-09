@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import sys
 
 from gh_momentum import __version__
@@ -69,8 +70,12 @@ def build_parser() -> argparse.ArgumentParser:
         "--token", default=None,
         help=(
             "GitHub token (or set the GITHUB_TOKEN env var) to raise the "
-            "rate limit from 60 to 5,000 requests/hour"
+            "Search API rate limit from 10 to 30 requests/minute"
         ),
+    )
+    parser.add_argument(
+        "-v", "--verbose", action="store_true",
+        help="log a summary of the run to stderr",
     )
     parser.add_argument(
         "--version", action="version", version=f"gh-momentum {__version__}",
@@ -80,6 +85,10 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    logging.basicConfig(
+        level=logging.INFO if args.verbose else logging.WARNING,
+        format="gh-momentum: %(levelname)s: %(message)s",
+    )
 
     match = [m for m in args.match.split(",") if m.strip()]
     repos = find_momentum(

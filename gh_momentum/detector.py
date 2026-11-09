@@ -1,15 +1,18 @@
 """Momentum scoring — ranks repos by how fast they are gaining traction.
 
 The score (0-10) combines three signals:
-  * **star velocity** (stars/day) — the primary signal
+  * **star velocity** (stars per day of real age) — the primary signal
   * **absolute stars** — a small confidence bonus
   * **keyword match** — an optional boost when a repo matches topics you care about
 """
 from __future__ import annotations
 
+import logging
 from dataclasses import asdict, dataclass, field
 
 from gh_momentum.github_api import fetch_repos_by_topic, fetch_trending_repos
+
+log = logging.getLogger("gh_momentum.detector")
 
 
 @dataclass
@@ -84,20 +87,35 @@ def find_momentum(
     keywords = {k.lower().strip() for k in (match or []) if k.strip()}
 
     repos: dict[str, dict] = {}
+    unnamed = 0
     for repo in fetch_trending_repos(
         days_back=days_back, min_stars=min_stars, token=token
     ):
         if repo["name"]:
             repos[repo["name"]] = repo
+        else:
+            unnamed += 1
+            log.warning("Skipped a trending result with no full_name.")
 
     for topic in topics or []:
         for repo in fetch_repos_by_topic(topic, token=token):
             if repo["name"]:
                 repos.setdefault(repo["name"], repo)
+            else:
+                unnamed += 1
+                log.warning(
+                    "Skipped a result with no full_name (topic %r).", topic
+                )
 
     results: list[MomentumRepo] = []
+    below_velocity = 0
     for repo in repos.values():
         if (repo.get("star_velocity_per_day", 0) or 0) < min_velocity:
+            below_velocity += 1
+            log.debug(
+                "%s: %s stars/day is below min_velocity %s; skipped.",
+                repo["name"], repo.get("star_velocity_per_day", 0), min_velocity,
+            )
             continue
         score, matched = _score(repo, keywords)
         results.append(
@@ -114,5 +132,13 @@ def find_momentum(
             )
         )
 
-    results.sort(key=lambda r: r.score, reverse=True)
+    # The score is derived from star velocity. It is capped and rounded, so
+    # different velocities can share one score; velocity breaks those ties.
+    results.sort(key=lambda r: (r.score, r.star_velocity_per_day), reverse=True)
+    log.info(
+        "Run summary: %d unique repos, %d below min_velocity=%s, "
+        "%d without a name, %d returned (limit %d).",
+        len(repos), below_velocity, min_velocity, unnamed,
+        min(len(results), limit), limit,
+    )
     return results[:limit]

@@ -88,6 +88,9 @@ gh-momentum --match "python,fastapi,cli"
 
 # Machine-readable output
 gh-momentum --json | jq '.[] | .name'
+
+# Log a summary of the run (repos seen, skipped, returned) to stderr
+gh-momentum --verbose
 ```
 
 ### Rate limits
@@ -190,7 +193,7 @@ The 0-10 score combines three signals:
 
 | Signal              | Weight                                            |
 |---------------------|---------------------------------------------------|
-| **Star velocity**   | Primary. `stars/day`, saturates near 8.0          |
+| **Star velocity**   | Primary. Stars per day since creation (min. 1 day), saturates near 8.0 |
 | **Absolute stars**  | Small confidence bonus (up to +1.0)               |
 | **Keyword match**   | Optional boost when `--match` keywords hit (up to +1.5) |
 
